@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800&family=Inter:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Muted warm tones - Luxury Curator Archetype */
+    --color-primary: #121212; /* Deep Obsidian */
+    --color-accent: #C87D5D;  /* Radiant Copper */
+    --color-accent-soft: rgba(200, 125, 93, 0.08);
+    --color-accent-glow: rgba(200, 125, 93, 0.4);
+
+    /* Backgrounds */
+    --color-page-bg: #FAF9F6;      /* Pure Cotton */
+    --color-surface-card: #FFFFFF;
+    --color-surface-hover: #F8F5F2; /* Soft Oat */
+
+    /* Text */
+    --color-text-main: #1A1A1A;    /* Architectural Gray */
+    --color-text-muted: #555555;
+    --color-text-subtle: #A0A0A0;
+
+    /* Decoration */
+    --color-border: rgba(0, 0, 0, 0.06);
+    --color-border-bright: rgba(255, 255, 255, 0.2);
+
+    /* Typography Scale - Modular Scale (1.250) */
+    --h1: clamp(3rem, 7vw + 1rem, 6rem);
+    --h2: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    --h3: clamp(1.75rem, 3vw + 1rem, 3rem);
+    --h4: clamp(1.25rem, 2vw + 1rem, 2rem);
+    --body: 1.05rem;
+    --eyebrow: 0.7rem;
+
+    --noise-opacity: 0.02;
+    --shadow-blur: 40px;
+    --glass-blur: 12px;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-page-bg text-text-main font-body antialiased;
+    letter-spacing: -0.01em;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  h1 { font-size: var(--h1); @apply font-display font-semibold leading-[1.1] tracking-tighter; }
+  h2 { font-size: var(--h2); @apply font-display font-medium leading-[1.2] tracking-tight; }
+  h3 { font-size: var(--h3); @apply font-display font-medium leading-[1.3]; }
+  h4 { font-size: var(--h4); @apply font-display font-medium; }
+}
+
+/* Base Styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E8E1DA;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C87D5D;
+}
+
+/* Utilities for structural lines and minimalist architectural features */
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .architectural-grid {
+    background-image: linear-gradient(to right, #E8E1DA 1px, transparent 1px),
+      linear-gradient(to bottom, #E8E1DA 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.1;
+  }
+
+  .architectural-divider {
+    border-top: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  .architectural-divider::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 30px;
+    height: 3px;
+    background-color: var(--color-accent);
+  }
+
+  .shadow-float {
+    box-shadow: 0 20px 80px -20px rgba(0, 0, 0, 0.12);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  }
+
+  .shadow-glow-accent {
+    box-shadow: 0 0 30px var(--color-accent-glow);
+  }
+
+  .animate-slow-zoom {
+    animation: slowZoom 20s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  @keyframes slowZoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+  }
+
+  .glass-card {
+    @apply bg-white/40 backdrop-blur-[8px] border border-white/30;
+  }
+
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-float-slow {
+    animation: float 12s ease-in-out infinite reverse;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(1deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+  }
+
+  @keyframes pulse {
+    0% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.05); }
+    100% { opacity: 0.3; transform: scale(1); }
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .architectural-mask {
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+
+  .hero-glow {
+    background: radial-gradient(circle at center, var(--color-accent) 0%, transparent 60%);
+    opacity: 0.15;
+    filter: blur(80px);
+  }
+
+  /* Custom scrollbar utility - used in DiscoveryPage, LogCard, LogVisit etc. */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent);
+  }
+
+  /* Fade-in animation utility - used in dropdown menus */
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out forwards;
+  }
+}
+
+/* React Leaflet Minimal Luxury Overrides */
+.custom-map-container .leaflet-popup-content-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 1.5rem !important;
+}
+
+.custom-map-container .leaflet-popup-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: inherit;
+}
+
+.custom-map-container .leaflet-popup-tip-container {
+  display: none !important; /* Hide default leaflet triangle pointer */
+}
+
+.custom-map-container .leaflet-control-zoom {
+  border: 1px solid rgba(0,0,0,0.05) !important;
+  border-radius: 1rem !important;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04) !important;
+  margin-top: 24px !important;
+  margin-right: 24px !important;
+}
+
+.custom-map-container .leaflet-control-zoom-in,
+.custom-map-container .leaflet-control-zoom-out {
+  background-color: white !important;
+  color: #1A1A1A !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s ease;
+}
+
+.custom-map-container .leaflet-control-zoom-in:hover,
+.custom-map-container .leaflet-control-zoom-out:hover {
+  background-color: #F8F5F2 !important;
+  color: #C87D5D !important;
+}
